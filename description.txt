@@ -1,0 +1,37 @@
+"A style of architecture or art characterized by a deliberate plainness, crudity, or violence of imagery." - Oxford Dictionary entry for "Brutalism".
+
+I promised one day I'd make a balanced and sensible skyblock mod people could enjoy.  I failed.  Skyblock Brutalism is a cruel and minimalistic mod intended for a modpack made for my masochistic skyblock community.  The mod functions perfectly well on it's own, but I suggest starting with the actual modpack for some quality of life features.  There's a couple settings worth doing mentioned in the mod pack collection.  Sadly I can't just upload my config files here.
+
+To start, simply install the mod/pack, enable the mods, and generate a world and new player.  If you don't start with a Sky Guide, your character was made before the mod was active.  Make a new character or cheat one in.  That book is important.  Refer to it and the Recipe Browser mod for tips.
+
+Mod Pack:
+https://steamcommunity.com/sharedfiles/filedetails/?id=3045019028
+
+As of 1.0 this mod is decently well tested and considered "finished", but bug squashing will continue, especially relating to the new config file, and feedback is always welcome.
+
+DISCORD
+
+https://discor*d.gg/YPHQKeJ
+
+Copy/Paste the link and delete the * to get in.  Sorry for the inconvenience, it's to reduce web crawling spam bots.
+
+CREDITS
+Gan AKA @ganpan14o: Most of the sprite art (the good ones)
+Jacklz: UI code janitorial duty
+David (ghost emote) [Crowd Control Mod] aka davidfdev: Solved several of my derps and harder code routing tricks.
+amorphousEnthusiast aka absoluteaquarian: general method wisdom.
+GabeHasWon aka gabehaswon: gnome wrangling and other info nuggets.
+lightningfish aka oceanic creature aka stormytuna: make up your mind!... but thanks.
+And of course jopojelly who has code in every Terraria mod in existence.  For me it was teaching how item instance data works.
+
+LICENSE
+
+This shouldn't need clarification, but the Revised BSD license is fairly open.  Roughly simplifying the clauses...
+
+If you redistribute all/parts of this mod, the part that you used doesn't magically become closed source that you can withhold from others or claim copyright against anyone else who uses it.
+If you do something stupid/amazing/malicious that involves using this code don't try to pin it on me.
+I warranty nothing.  If you running this pack kills John Wick's puppy, it's not my fault and I had nothing to do with it.
+ 
+Beyond that you are welcome to learn from, copy/paste or even blatantly steal any of my work from this mod in it's entirety.
+
+On a personal note, while I respect licenses and people's work, I feel that for map/mod/pack makers like myself, claiming exclusive copyright is hypocritical and ONLY hurts the community.  We build our work on the backs of the ReLogic team and through the inspiration of other content creators.  Without each other there are no maps, mods, or packs.  If any of my builds, ideas, or messages can help you make a better map or mod faster than you could by yourself then I'm just happy I could help.

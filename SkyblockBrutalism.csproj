@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\tModLoader.targets" />
+  <PropertyGroup>
+    <AssemblyName>SkyblockBrutalism</AssemblyName>
+    <TargetFramework>net6.0</TargetFramework>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="icon_small.png" />
+    <None Remove="icon_workshop.png" />
+    <None Remove="Items\Bee.png" />
+    <None Remove="Items\CrimsonAltar.png" />
+    <None Remove="Items\DemonAltar.png" />
+    <None Remove="Items\FireResistantBugNet.png" />
+    <None Remove="Items\Honey.png" />
+    <None Remove="Items\icon.png" />
+    <None Remove="Items\Lava.png" />
+    <None Remove="Items\LeakyBarrel.png" />
+    <None Remove="Items\LifelessVoodooDoll.png" />
+    <None Remove="Items\NaturalDirtWall.png" />
+    <None Remove="Items\RuinedGnome.png" />
+    <None Remove="Items\Shimmer.png" />
+    <None Remove="Items\Skyblock.png" />
+    <None Remove="Items\SkyGuide.png" />
+    <None Remove="Items\SlimyCloud.png" />
+    <None Remove="Items\StormCloud.png" />
+    <None Remove="Items\Water.png" />
+    <None Remove="Tiles\LeakyBarrel.png" />
+    <None Remove="Tiles\Skyblock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
+  </ItemGroup>
+</Project>

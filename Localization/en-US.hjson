@@ -1,0 +1,227 @@
+ItemName.GelBalloon: "{$SlimeNames_Rainbow.Shimmer} {$NPCName.SlimeMasked} {$Misc.Balloon}"
+
+ItemTooltip: {
+	GelBalloon: A launchable bucket of Shimmer
+	Fertilizer:
+		'''
+		Instantly grows most plants and grasses.
+		Has a chance to generate rare plants,
+		but only on the correct soil types.
+		'''
+}
+
+Mods: {
+	SkyblockBrutalism: {
+		BlankWorldGen.MakeSkyblock: Generating Skyblock World
+		DropConditions.Dirt: killed with [i:GravediggerShovel]
+		ItemEdits.GraveDigDirt: Intered Zombies become [i:DirtBlock]
+
+		UI: {
+			Title: "[c/0099FF:Skyblock] [c/990000:Brutalism]"
+			TipsButton: Tips
+			IntroButton: Intro
+			EasyButton: "[c/FF00FF:Sparkling] [i:BottomlessShimmerBucket]"
+			HardButton: "[c/808080:Mundane] [i/s10:StoneBlock]"
+			BrutalButton: "[c/800000:Devastated] [i/s10:AshBlock]"
+			Intro:
+				'''
+				Welcome.  This minimalistic challenge mod is designed
+				to test your game knowledge.  Worlds generated with
+				this mod contain only 5 equidistant skyblocks (for
+				different teams), and 1 dungeon point.  As thanks for
+				playing, I'll let you pick your starting item(s).
+				                                                -Freedbot
+
+
+				Select the desired 'mood' of your skyblock experience.
+				'''
+			Tips:
+				'''
+				The tips here only cover what's not in Recipe Browser.
+				Read item descriptions.  Read terraria.wiki.gg.
+				1st boss kills per character = [i:LifeCrystal]([i:LifeFruit]after any [i:MechanicalEye])
+				See:[i:GravediggerShovel],[i:SuspiciousLookingEye],[i:Fertilizer],[i:Cobweb],[i:Granite],[i:Marble],[i:ClayBlock],[i:AshBlock]     [i:SnowGlobe] is re-tiered.
+				[i:SuspiciousLookingEye]=[i:JungleGrassSeeds]=[i:Furnace]    [i:Torch]=[i:SpiderWallUnsafe][i:HardenedSandWallUnsafe][i:BlueBrickWallUnsafe][i:LihzahrdWallUnsafe]     [i:SkyblockBrutalism/NaturalDirtWall]=[i:StoneBlock]    [i:SkyblockBrutalism/Lava]=[i:SkyblockBrutalism/Water]
+				[i:StoneBlock]+[i:Extractinator]=[i:SandBlock]     [i:BeeHive]->[i:SkyblockBrutalism/Water]or[i:WoodFishingPole]->[i:SkyblockBrutalism/Honey]=[i:Hive]     [i:DeerThing]=[i:IceBlock]
+				[i:LavaCrate]=[i:Hellstone]     [i:ObsidianLockbox]=[i:Hellforge]     [i:Gel]=[i:DartTrap]=[i:GeyserTrap][i:SuperDartTrap][i:FlameTrap][i:SpikyBallTrap][i:SpearTrap]
+				No [i:TempleKey]'s are consumed for[i:LihzahrdBrick].     [i:DungeonFishingCrateHard]=[i:HeartStatue]
+				[i:PurificationPowder]& [i:Clentaminator] are available in Remix worlds.
+				[i:Tombstone]+[i:SolarTablet]/[i:BloodMoonStarter]= alternate[i:PurpleSolution]/[i:RedSolution]     [i:MartianUniformHelmet]=[i:SandSolution][i:SnowSolution][i:DirtSolution]
+				'''
+		}
+
+		Items: {
+			Skyblock: {
+				DisplayName: Skyblock
+				Tooltip:
+					'''
+					Right click to set spawn.
+					Unbreakable, but infinitely mineable.
+					Drops 3 cloud types, coins, or nothing.
+					'Your beginning, home, and only friend here.
+					Five total are spaced horizontally across
+					the world for different teams to use.'
+					'''
+			}
+
+			RuinedGnome: {
+				DisplayName: Ruined Gnome
+				Tooltip:
+					'''
+					Your desperation for stone has lead you to massacre
+					a poor garden gnome with an evil hammer. [i:TheBreaker]/[i:FleshGrinder]
+					'After all, a gnome that's turned to stone should
+					be usable as such... right?'
+					'''
+			}
+
+			SkyGuide: {
+				DisplayName: Sky Guide
+				Tooltip:
+					'''
+					Your guide to the stars
+					The Choice is Final.
+					'''
+			}
+
+			CrimsonAltar: {
+				DisplayName: Crimson Altar
+				Tooltip: ""
+			}
+
+			DemonAltar: {
+				DisplayName: Demon Altar
+				Tooltip: ""
+			}
+
+			Bee: {
+				DisplayName: Bee
+				Tooltip:
+					'''
+					'The situation has only been made worse
+					 by the addition of yet more bees!'
+					 These aren't for progression, just memes.
+					'''
+			}
+
+			Honey: {
+				DisplayName: Honey
+				Tooltip: Found in hives.  Where else?
+			}
+
+			Lava: {
+				DisplayName: Lava
+				Tooltip: It'll be plentiful where you're going.
+			}
+
+			Shimmer: {
+				DisplayName: Shimmer
+				Tooltip: Possessed only by royalty.
+			}
+
+			StormCloud: {
+				DisplayName: Storm Cloud
+				Tooltip:
+					'''
+					'You called the Thunder?
+					Now reap the whirlwind.'
+					'''
+			}
+
+			Water: {
+				DisplayName: Water
+				Tooltip: An elusive goal. Try going for other liquids first.
+			}
+
+			FireResistantBugNet: {
+				DisplayName: Fire Resistant Bug Net
+				Tooltip:
+					'''
+					Midway between a regular net and a fireproof one.
+					Only melts sometimes!
+					'''
+			}
+
+			SlimyCloud: {
+				DisplayName: Slimy Cloud
+				Tooltip: A foul mist of concentrated polution.
+			}
+
+			LeakyBarrel: {
+				DisplayName: Leaky Barrel
+				Tooltip:
+					'''
+					It was worth a try, but most of the water is gone.
+					Still, you could get some dirt wet with this.
+					'''
+			}
+
+			LifelessVoodooDoll: {
+				DisplayName: Lifeless Voodoo Doll
+				Tooltip:
+					'''
+					The magic is gone from this eary doll.  Seemingly, it
+					was used to create other miracles in this empty world.
+					If only you could borrow some otherworldly power
+					or ancient knowledge to revitalize it.
+					'''
+			}
+
+			NaturalDirtWall: {
+				DisplayName: Natural Dirt Wall
+				Tooltip: ""
+			}
+		}
+
+		Tiles: {
+			Skyblock.MapEntry: Skyblock
+			EvilAltarTile.MapEntry: Evil Altar Tile
+			LeakyBarrel.MapEntry: Leaky Barrel
+		}
+
+		Configs: {
+			Config: {
+				DisplayName: Config
+
+				EarlyFurniture: {
+					Tooltip:
+						'''
+						Add Skyware furniture recipes using stars and clouds.
+						Without this, you're expected to fight before you can
+						craft at a workbench or make NPC housing.
+						'''
+					Label: Early Furniture
+				}
+
+				LifelessVoodooDoll: {
+					Tooltip:
+						'''
+						Disable to make demons drop normal guide dolls again.
+						Reduces the challenge of mod progression.
+						'''
+					Label: Lifeless Voodoo Doll
+				}
+
+				SkyblockWorldGen: {
+					Tooltip:
+						'''
+						Only disable if you want this mod's features,
+						but don't want to disable the mod when making
+						new non-skyblock worlds.
+						'''
+					Label: Generate Skyblock Worlds
+				}
+
+				SkyGuideStart: {
+					Tooltip:
+						'''
+						New characters start with a book that has a choice of starter items
+						and some gameplay tips.  This book is IMPORTANT.  Do not disable
+						unless you aren't playing a skyblock world and already know the tips.
+						'''
+					Label: Start with Sky Guide
+				}
+			}
+		}
+	}
+}
