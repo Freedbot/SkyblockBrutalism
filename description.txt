@@ -15,6 +15,9 @@ https://discor*d.gg/YPHQKeJ
 
 Copy/Paste the link and delete the * to get in.  Sorry for the inconvenience, it's to reduce web crawling spam bots.
 
+GITHUB
+https://github.com/Freedbot/SkyblockBrutalism
+
 CREDITS
 Gan AKA @ganpan14o: Most of the sprite art (the good ones)
 Jacklz: UI code janitorial duty
