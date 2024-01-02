@@ -12,7 +12,10 @@ namespace SkyblockBrutalism
 	{
         public override void AddRecipeGroups()
         {
-            RecipeGroup group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.ShadowScale)}", ItemID.ShadowScale, ItemID.TissueSample);
+            RecipeGroup group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.CorruptSeeds)}", ItemID.CorruptSeeds, ItemID.CrimsonSeeds);
+            RecipeGroup.RegisterGroup(nameof(ItemID.CorruptSeeds), group);
+
+            group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.ShadowScale)}", ItemID.ShadowScale, ItemID.TissueSample);
             RecipeGroup.RegisterGroup(nameof(ItemID.ShadowScale), group);
 
             group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.GoldCrown)}", ItemID.GoldCrown, ItemID.PlatinumCrown);
@@ -116,7 +119,7 @@ namespace SkyblockBrutalism
                 .Register();
 
             recipe = Recipe.Create(ItemID.JungleGrassSeeds)
-                .AddIngredient(ItemID.CorruptSeeds)
+                .AddRecipeGroup(nameof(ItemID.CorruptSeeds))
                 .AddIngredient(ItemID.PurificationPowder)
                 .Register();
             //Statues
@@ -131,7 +134,6 @@ namespace SkyblockBrutalism
                 .AddRecipeGroup(nameof(ItemID.GoldCrown))
                 .AddTile(TileID.HeavyWorkBench)
                 .Register();
-
             //Trap Conversions
             recipe = Recipe.Create(ItemID.GeyserTrap)
                 .AddIngredient(ItemID.DartTrap)

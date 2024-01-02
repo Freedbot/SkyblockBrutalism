@@ -41,7 +41,7 @@ Mods: {
 				Read item descriptions.  Read terraria.wiki.gg.
 				1st boss kills per character = [i:LifeCrystal]([i:LifeFruit]after any [i:MechanicalEye])
 				See:[i:GravediggerShovel],[i:SuspiciousLookingEye],[i:Fertilizer],[i:Cobweb],[i:Granite],[i:Marble],[i:ClayBlock],[i:AshBlock]     [i:SnowGlobe] is re-tiered.
-				[i:SuspiciousLookingEye]=[i:JungleGrassSeeds]=[i:Furnace]    [i:Torch]=[i:SpiderWallUnsafe][i:HardenedSandWallUnsafe][i:BlueBrickWallUnsafe][i:LihzahrdWallUnsafe]     [i:SkyblockBrutalism/NaturalDirtWall]=[i:StoneBlock]    [i:SkyblockBrutalism/Lava]=[i:SkyblockBrutalism/Water]
+				[i:SuspiciousLookingEye]=[i:JungleGrassSeeds]=[i:Furnace]    [i/s106:Torch]=[i:SpiderWallUnsafe][i:HardenedSandWallUnsafe][i:BlueBrickWallUnsafe][i:LihzahrdWallUnsafe]     [i:SkyblockBrutalism/NaturalDirtWall]=[i:StoneBlock]    [i:SkyblockBrutalism/Lava]=[i:SkyblockBrutalism/Water]
 				[i:StoneBlock]+[i:Extractinator]=[i:SandBlock]     [i:BeeHive]->[i:SkyblockBrutalism/Water]or[i:WoodFishingPole]->[i:SkyblockBrutalism/Honey]=[i:Hive]     [i:DeerThing]=[i:IceBlock]
 				[i:LavaCrate]=[i:Hellstone]     [i:ObsidianLockbox]=[i:Hellforge]     [i:Gel]=[i:DartTrap]=[i:GeyserTrap][i:SuperDartTrap][i:FlameTrap][i:SpikyBallTrap][i:SpearTrap]
 				No [i:TempleKey]'s are consumed for[i:LihzahrdBrick].     [i:DungeonFishingCrateHard]=[i:HeartStatue]
