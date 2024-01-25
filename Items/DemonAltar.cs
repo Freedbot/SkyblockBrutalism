@@ -38,7 +38,7 @@ namespace SkyblockBrutalism.Items
             CreateRecipe()
                 .AddIngredient(ItemID.DemonTorch, 5)
                 .AddIngredient(ItemID.RottenChunk, 10)
-                .AddIngredient(ItemID.Shadewood, 20)
+                .AddIngredient(ItemID.Ebonwood, 20)
                 .AddTile(TileID.WorkBenches)
                 .Register();
         }
