@@ -110,16 +110,14 @@ namespace SkyblockBrutalism.NPCs
                         entity.defense = 0;
                     }
                 }
-                //Bees are critters. I changed progression so I don't need this...
-                //but the memes...  See Items/Bee.cs
-                if (entity.type == NPCID.Bee || entity.type == NPCID.BeeSmall)
-                {
-                    Main.npcCatchable[entity.type] = true;
-                    entity.catchItem = ModContent.ItemType<Items.Bee>();
-                }
+            }
+            //Bees are critters. I changed progression so I don't need this...
+            //but the memes...  See Items/Bee.cs
+            if (entity.type == NPCID.Bee || entity.type == NPCID.BeeSmall)
+            {
+                Main.npcCatchable[entity.type] = true;
+                entity.catchItem = ModContent.ItemType<Items.Bee>();
             }
         }
     }
-
-
 }

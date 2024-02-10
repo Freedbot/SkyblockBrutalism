@@ -14,9 +14,12 @@ namespace SkyblockBrutalism
         //Frost Legion Stats for projectiles.  See NPCEdits.
         public override void ModifyHitPlayer(Projectile projectile, Player target, ref Player.HurtModifiers modifiers)
         {
-            if (projectile.type == ProjectileID.RockGolemRock || projectile.type == ProjectileID.BulletSnowman || projectile.type == ProjectileID.SnowBallHostile)
+            if (!Main.hardMode)
             {
-                modifiers.SourceDamage /= 4;
+                if (projectile.type == ProjectileID.RockGolemRock || projectile.type == ProjectileID.BulletSnowman || projectile.type == ProjectileID.SnowBallHostile)
+                {
+                    modifiers.SourceDamage /= 4;
+                }
             }
         }
         //kill shimmer balloon when wet.  Kill isn't calling our OnKill here, and small projectile size means we need to place above the liquid surface anyway, so just repeat the liquid placement here.
