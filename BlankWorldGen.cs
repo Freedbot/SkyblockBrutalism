@@ -40,8 +40,15 @@ namespace SkyblockBrutalism
             Main.dungeonX = Main.maxTilesX / 2;
             Main.dungeonY = Main.maxTilesY / 4 - 80;
             Main.worldSurface = (double)(Main.maxTilesY / 4);
-            Main.rockLayer = Main.maxTilesY / 2.5;
-
+            if (Main.remixWorld)
+            {
+                Main.rockLayer = Main.maxTilesY / 1.6 - 50;
+            }
+            else
+            {
+                Main.rockLayer = Main.maxTilesY / 2.5;
+            }
+            
             int isleSpread = Main.maxTilesX / 6;
             for (int i = Main.spawnTileX; i < Main.maxTilesX-10; i += isleSpread)
             {
