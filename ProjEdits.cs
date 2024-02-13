@@ -432,7 +432,7 @@ namespace SkyblockBrutalism
                                             case TileID.ChlorophyteBrick:
                                                 {
                                                     //Spread Chlorophyte
-                                                    if (Main.hardMode && ((double)j > (Main.worldSurface + Main.rockLayer) / 2.0 || Main.remixWorld))
+                                                    if (Main.hardMode && (j > (Main.worldSurface + Main.rockLayer) / 2.0 || Main.remixWorld))
                                                     {
                                                         int chloroSpreadX = i;
                                                         int chloroSpreadY = j;
@@ -472,7 +472,7 @@ namespace SkyblockBrutalism
                                             case TileID.JungleGrass:
                                                 {
                                                     //Generate Chlorophyte
-                                                    if (Main.hardMode && ((double)j > (Main.worldSurface + Main.rockLayer) / 2.0 || Main.remixWorld) && WorldGen.genRand.NextBool(10))
+                                                    if (Main.hardMode && (j > (Main.worldSurface + Main.rockLayer) / 2.0 || Main.remixWorld) && WorldGen.genRand.NextBool(10))
                                                     {
                                                         int chloroX = i + WorldGen.genRand.Next(-10, 11);
                                                         int chloroY = j + WorldGen.genRand.Next(-10, 11);
@@ -491,65 +491,68 @@ namespace SkyblockBrutalism
                                                     {
                                                         break;
                                                     }
-                                                    //Plantera Bulb
-                                                    if (Main.hardMode && NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3 && WorldGen.genRand.NextBool(30))
+                                                    if (j > Main.worldSurface || Main.remixWorld)
                                                     {
-                                                        bool bulbAllowed = true;
-                                                        int bulbSpacing = 150;
-                                                        for (int bulbCheckX = i - bulbSpacing; bulbCheckX < i + bulbSpacing; bulbCheckX += 2)
+                                                        //Plantera Bulb
+                                                        if (Main.hardMode && NPC.downedMechBoss1 && NPC.downedMechBoss2 && NPC.downedMechBoss3 && WorldGen.genRand.NextBool(30))
                                                         {
-                                                            for (int bulbCheckY = j - bulbSpacing; bulbCheckY < j + bulbSpacing; bulbCheckY += 2)
+                                                            bool bulbAllowed = true;
+                                                            int bulbSpacing = 150;
+                                                            for (int bulbCheckX = i - bulbSpacing; bulbCheckX < i + bulbSpacing; bulbCheckX += 2)
                                                             {
-                                                                if (bulbCheckX > 1 && bulbCheckX < Main.maxTilesX - 2 && bulbCheckY > 1 && bulbCheckY < Main.maxTilesY - 2 && Framing.GetTileSafely(bulbCheckX, bulbCheckY).HasTile && Framing.GetTileSafely(bulbCheckX, bulbCheckY).TileType == TileID.PlanteraBulb)
+                                                                for (int bulbCheckY = j - bulbSpacing; bulbCheckY < j + bulbSpacing; bulbCheckY += 2)
                                                                 {
-                                                                    bulbAllowed = false;
-                                                                    break;
+                                                                    if (bulbCheckX > 1 && bulbCheckX < Main.maxTilesX - 2 && bulbCheckY > 1 && bulbCheckY < Main.maxTilesY - 2 && Framing.GetTileSafely(bulbCheckX, bulbCheckY).HasTile && Framing.GetTileSafely(bulbCheckX, bulbCheckY).TileType == TileID.PlanteraBulb)
+                                                                    {
+                                                                        bulbAllowed = false;
+                                                                        break;
+                                                                    }
                                                                 }
                                                             }
-                                                        }
-                                                        if (bulbAllowed)
-                                                        {
-                                                            WorldGen.PlaceJunglePlant(i, j - 1, TileID.PlanteraBulb, 0, 0);
-                                                            WorldGen.SquareTileFrame(i, j - 1);
-                                                            WorldGen.SquareTileFrame(i + 2, j - 1);
-                                                            WorldGen.SquareTileFrame(i - 1, j - 1);
-                                                            if (tileAbove.TileType == TileID.PlanteraBulb && Main.netMode == NetmodeID.Server)
+                                                            if (bulbAllowed)
                                                             {
-                                                                NetMessage.SendTileSquare(-1, i, j - 1, 5);
-                                                            }
-                                                            break;
-                                                        }
-                                                    }
-                                                    //Life Fruit.  Has better chances and spacing in Expert+
-                                                    if (Main.hardMode && NPC.downedMechBossAny && WorldGen.genRand.NextBool(Main.expertMode ? 26 : 30))
-                                                    {
-                                                        bool lifeFruitAllowed = true;
-                                                        int lifeFruitSpacing = 60;
-                                                        if (Main.expertMode)
-                                                        {
-                                                            lifeFruitSpacing -= 10;
-                                                        }
-                                                        for (int fruitCheckX = i - lifeFruitSpacing; fruitCheckX < i + lifeFruitSpacing; fruitCheckX += 2)
-                                                        {
-                                                            for (int fruitCheckY = j - lifeFruitSpacing; fruitCheckY < j + lifeFruitSpacing; fruitCheckY += 2)
-                                                            {
-                                                                if (fruitCheckX > 1 && fruitCheckX < Main.maxTilesX - 2 && fruitCheckY > 1 && fruitCheckY < Main.maxTilesY - 2 && Framing.GetTileSafely(fruitCheckX, fruitCheckY).HasTile && Framing.GetTileSafely(fruitCheckX, fruitCheckY).TileType == TileID.LifeFruit)
+                                                                WorldGen.PlaceJunglePlant(i, j - 1, TileID.PlanteraBulb, 0, 0);
+                                                                WorldGen.SquareTileFrame(i, j - 1);
+                                                                WorldGen.SquareTileFrame(i + 2, j - 1);
+                                                                WorldGen.SquareTileFrame(i - 1, j - 1);
+                                                                if (tileAbove.TileType == TileID.PlanteraBulb && Main.netMode == NetmodeID.Server)
                                                                 {
-                                                                    lifeFruitAllowed = false;
-                                                                    break;
+                                                                    NetMessage.SendTileSquare(-1, i, j - 1, 5);
+                                                                }
+                                                                break;
+                                                            }
+                                                        }
+                                                        //Life Fruit.  Has better chances and spacing in Expert+
+                                                        if (Main.hardMode && NPC.downedMechBossAny && WorldGen.genRand.NextBool(Main.expertMode ? 26 : 30))
+                                                        {
+                                                            bool lifeFruitAllowed = true;
+                                                            int lifeFruitSpacing = 60;
+                                                            if (Main.expertMode)
+                                                            {
+                                                                lifeFruitSpacing -= 10;
+                                                            }
+                                                            for (int fruitCheckX = i - lifeFruitSpacing; fruitCheckX < i + lifeFruitSpacing; fruitCheckX += 2)
+                                                            {
+                                                                for (int fruitCheckY = j - lifeFruitSpacing; fruitCheckY < j + lifeFruitSpacing; fruitCheckY += 2)
+                                                                {
+                                                                    if (fruitCheckX > 1 && fruitCheckX < Main.maxTilesX - 2 && fruitCheckY > 1 && fruitCheckY < Main.maxTilesY - 2 && Framing.GetTileSafely(fruitCheckX, fruitCheckY).HasTile && Framing.GetTileSafely(fruitCheckX, fruitCheckY).TileType == TileID.LifeFruit)
+                                                                    {
+                                                                        lifeFruitAllowed = false;
+                                                                        break;
+                                                                    }
                                                                 }
                                                             }
-                                                        }
-                                                        if (lifeFruitAllowed)
-                                                        {
-                                                            WorldGen.PlaceJunglePlant(i, j - 1, TileID.LifeFruit, WorldGen.genRand.Next(3), 0);//style, not chance
-                                                            WorldGen.SquareTileFrame(i, j - 1);
-                                                            WorldGen.SquareTileFrame(i + 1, j - 1 + 1);
-                                                            if (tileAbove.TileType == TileID.LifeFruit && Main.netMode == NetmodeID.Server)
+                                                            if (lifeFruitAllowed)
                                                             {
-                                                                NetMessage.SendTileSquare(-1, i, j - 1, 4);
+                                                                WorldGen.PlaceJunglePlant(i, j - 1, TileID.LifeFruit, WorldGen.genRand.Next(3), 0);//style, not chance
+                                                                WorldGen.SquareTileFrame(i, j - 1);
+                                                                WorldGen.SquareTileFrame(i + 1, j - 1 + 1);
+                                                                if (tileAbove.TileType == TileID.LifeFruit && Main.netMode == NetmodeID.Server)
+                                                                {
+                                                                    NetMessage.SendTileSquare(-1, i, j - 1, 4);
+                                                                }
+                                                                break;
                                                             }
-                                                            break;
                                                         }
                                                     }
                                                     //jungle tree
