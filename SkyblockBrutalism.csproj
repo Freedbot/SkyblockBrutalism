@@ -14,6 +14,7 @@
     <None Remove="Items\CrimsonAltar.png" />
     <None Remove="Items\DemonAltar.png" />
     <None Remove="Items\FireResistantBugNet.png" />
+    <None Remove="Items\Gelatin.png" />
     <None Remove="Items\Honey.png" />
     <None Remove="Items\icon.png" />
     <None Remove="Items\Lava.png" />

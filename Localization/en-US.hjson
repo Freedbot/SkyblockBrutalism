@@ -171,6 +171,16 @@ Mods: {
 				DisplayName: Natural Dirt Wall
 				Tooltip: ""
 			}
+
+			Gelatin: {
+				DisplayName: Gelatin
+				Tooltip:
+					'''
+					Sure it's tasty, but it wiggles all the way down.
+					Contains almost no nutritional value.
+					'There's always room for Jell-O!'
+					'''
+			}
 		}
 
 		Tiles: {

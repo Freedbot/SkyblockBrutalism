@@ -105,9 +105,12 @@ namespace SkyblockBrutalism
                 Player.ConsumedLifeFruit++;
             }
             //Play heart sound for client when given
-            if ((Main.netMode is NetmodeID.SinglePlayer or NetmodeID.MultiplayerClient) && heart != "")
+            if (Main.netMode is NetmodeID.SinglePlayer or NetmodeID.MultiplayerClient)
             {
-                SoundEngine.PlaySound(SoundID.Item4, Player.Center);
+                if (heart != "")
+                {
+                    SoundEngine.PlaySound(SoundID.Item4, Player.Center);
+                }
             }
             else //Forward boss ID to everyone from server (ignored by server in SkyblockBrutalism.HandlePacket)
             {
