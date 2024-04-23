@@ -38,7 +38,7 @@ namespace SkyblockBrutalism.Tiles
 
             DustType = 16;
             HitSound = null;
-            MineResist = 5f;
+            MineResist = 4f;
             //MinPick = ;
         }
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
@@ -121,19 +121,19 @@ namespace SkyblockBrutalism.Tiles
                 effectOnly = true;
                 int lootOdds = Main.rand.Next(99);
                 int lootDrop = ItemID.Cloud;
-                if (0 <= lootOdds && lootOdds <= 24)
+                if (0 <= lootOdds && lootOdds <= 19)
                 {
                     lootDrop = 0;
                 }
-                else if (25 <= lootOdds && lootOdds <= 44)
+                else if (20 <= lootOdds && lootOdds <= 39)
                 {
                     lootDrop = ItemID.CopperCoin;
                 }
-                else if (lootOdds == 45 || lootOdds == 46)
+                else if (40 <= lootOdds && lootOdds <= 44)
                 {
                     lootDrop = ItemID.RainCloud;
                 }
-                else if (lootOdds == 47)
+                else if (45 <= lootOdds && lootOdds <= 47)
                 {
                     lootDrop = ItemID.SnowCloudBlock;
                 }
