@@ -39,10 +39,10 @@ namespace SkyblockBrutalism
             Main.spawnTileY = Main.maxTilesY / 4 - 40;
             Main.dungeonX = Main.maxTilesX / 2;
             Main.dungeonY = Main.maxTilesY / 4 - 80;
-            Main.worldSurface = (double)(Main.maxTilesY / 4);
+            Main.worldSurface = Main.maxTilesY / 4;
             if (Main.remixWorld)
             {
-                Main.rockLayer = Main.maxTilesY / 1.6 - 50;
+                Main.rockLayer = Main.maxTilesY * 0.6;
             }
             else
             {
