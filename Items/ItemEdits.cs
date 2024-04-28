@@ -22,7 +22,12 @@ namespace SkyblockBrutalism.Items
             GraveDigDirt = Language.GetOrRegister(Mod.GetLocalizationKey($"ItemEdits.{nameof(GraveDigDirt)}"));
             //The Slimes ate all the traps!
             ItemID.Sets.OreDropsFromSlime[ItemID.DartTrap] = (2, 6);
+            //Part of assigning stone to extractonator use
             ItemID.Sets.ExtractinatorMode[ItemID.StoneBlock] = ItemID.StoneBlock;
+
+            //Custom Shimmer Recipes
+            ItemID.Sets.ShimmerTransformToItem[ItemID.GoldenKey] = ItemID.GoldChest;
+            ItemID.Sets.ShimmerTransformToItem[ItemID.ShadowKey] = ItemID.ShadowChest;
         }
         //Gravedigger Shovel Tierdown.  See RecipeEdits and NPCEdits.
         public override void SetDefaults(Item entity)

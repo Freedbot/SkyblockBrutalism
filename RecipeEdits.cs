@@ -10,6 +10,7 @@ namespace SkyblockBrutalism
 {
 	public class RecipeEdits : ModSystem
 	{
+        //See Items/ItemEdits for custom shimmer crafting.
         public override void AddRecipeGroups()
         {
             RecipeGroup group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.CorruptSeeds)}", ItemID.CorruptSeeds, ItemID.CrimsonSeeds);
