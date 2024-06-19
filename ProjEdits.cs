@@ -55,6 +55,7 @@ namespace SkyblockBrutalism
                     {
                         projectile.netUpdate = true;
                         Point ij = projectile.Center.ToTileCoordinates();
+                        WorldGen.EmptyLiquid(ij.X, ij.Y);
                         WorldGen.PlaceTile(ij.X, ij.Y, TileID.Hive, false, true);
                         if (Main.netMode == NetmodeID.Server)
                         {
