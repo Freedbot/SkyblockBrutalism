@@ -90,6 +90,17 @@ namespace SkyblockBrutalism.NPCs
                 }
             }
         }
+        //Finally, a fix for the void bug that leaves town NPC's trapped in the void without dying or respawning.  Turns out there's a not Christmas check for no reason in the kill code.
+        public override void PostAI(NPC npc)
+        {
+            if (Main.xMas)
+            {
+                if (npc.aiStyle == NPCAIStyleID.Passive && npc.position.Y > Main.bottomWorld - 640f + (float)npc.height && Main.netMode != NetmodeID.MultiplayerClient)
+                {
+                    npc.StrikeInstantKill();
+                }
+            }
+        }
         //Retier Frost Legion and Rock Golem to early game.  See Items.ItemEdits.cs
         //See ProjEdits for their ranged attack nerfs.
         public override void SetDefaults(NPC entity)
