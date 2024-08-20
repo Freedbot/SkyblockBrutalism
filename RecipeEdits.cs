@@ -34,14 +34,9 @@ namespace SkyblockBrutalism
                 .AddCondition(Condition.InGraveyard)
                 .Register();
 
-            //Early Furnature config option
+            //Early Furnature config option, decrafting of original recipes disabled below.
             if (ModContent.GetInstance<Config>().EarlyFurniture)
             {
-                recipe = Recipe.Create(ItemID.SkywareWorkbench)
-                    .AddIngredient(ItemID.Cloud, 10)
-                    .AddIngredient(ItemID.FallenStar, 6)
-                    .Register();
-
                 recipe = Recipe.Create(ItemID.SkywareTable)
                     .AddIngredient(ItemID.Cloud, 8)
                     .AddIngredient(ItemID.FallenStar, 2)
@@ -50,7 +45,13 @@ namespace SkyblockBrutalism
 
                 recipe = Recipe.Create(ItemID.SkywareChair)
                     .AddIngredient(ItemID.Cloud, 4)
-                    .AddIngredient(ItemID.FallenStar, 2)
+                    .AddIngredient(ItemID.FallenStar, 1)
+                    .AddTile(TileID.WorkBenches)
+                    .Register();
+
+                recipe = Recipe.Create(ItemID.SkywareDoor)
+                    .AddIngredient(ItemID.Cloud, 6)
+                    .AddIngredient(ItemID.FallenStar, 1)
                     .AddTile(TileID.WorkBenches)
                     .Register();
             }
@@ -305,6 +306,17 @@ namespace SkyblockBrutalism
                 if (recipe.HasResult(ItemID.GravediggerShovel) && recipe.HasTile(TileID.Anvils) && recipe.HasRecipeGroup(RecipeGroupID.IronBar) && recipe.HasRecipeGroup(RecipeGroupID.Wood))
                 {
                     recipe.DisableRecipe();
+                }
+                if (ModContent.GetInstance<Config>().EarlyFurniture)
+                {
+                    if ((recipe.HasResult(ItemID.SkywareChair) || recipe.HasResult(ItemID.SkywareDoor) || recipe.HasResult(ItemID.SkywareTable)) && recipe.HasTile(TileID.SkyMill))
+                    {
+                        recipe.DisableDecraft();
+                    }
+                    if (recipe.HasResult(ItemID.CloudWall) || recipe.HasResult(ItemID.Cloud))
+                    {
+                        recipe.RemoveTile(TileID.WorkBenches);
+                    }
                 }
             }
         }

@@ -1,5 +1,5 @@
 displayName = Skyblock Brutalism
 author = Freedbot
-version = 1.1.0
+version = 1.1.2
 includeSource = true
 homepage = https://github.com/Freedbot/SkyblockBrutalism
