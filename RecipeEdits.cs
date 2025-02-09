@@ -22,11 +22,17 @@ namespace SkyblockBrutalism
             group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.GoldCrown)}", ItemID.GoldCrown, ItemID.PlatinumCrown);
             RecipeGroup.RegisterGroup(nameof(ItemID.GoldCrown), group);
 
-            group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.AncientBlueDungeonBrick)}", ItemID.AncientBlueDungeonBrick, ItemID.AncientGreenDungeonBrick, ItemID.AncientPinkDungeonBrick); ;
+            group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.AncientBlueDungeonBrick)}", ItemID.AncientBlueDungeonBrick, ItemID.AncientGreenDungeonBrick, ItemID.AncientPinkDungeonBrick);
             RecipeGroup.RegisterGroup(nameof(ItemID.AncientBlueDungeonBrick), group);
+
+            group = new RecipeGroup(() => $"{Language.GetTextValue("LegacyMisc.37")} {Lang.GetItemNameValue(ItemID.AncientGoldBrick)}", ItemID.AncientGoldBrick, ItemID.AncientSilverBrick, ItemID.AncientCopperBrick);
+            RecipeGroup.RegisterGroup(nameof(ItemID.AncientGoldBrick), group);
         }
         public override void AddRecipes()
         {
+            //Restricted Mode locks Demon Altars behind MoonLord ore.  Alternates are required for specific recipes using them.
+            ushort DemonAltarOrTinkerRestricted = ModContent.GetInstance<Config>().RestrictedMode ? TileID.TinkerersWorkbench : TileID.DemonAltar;
+
             //Gravedigger Shovel Tierdown.  See ItemEdits and NPCEdits.
             Recipe recipe = Recipe.Create(ItemID.GravediggerShovel)
                 .AddRecipeGroup(RecipeGroupID.Wood, 15)
@@ -40,19 +46,16 @@ namespace SkyblockBrutalism
                 recipe = Recipe.Create(ItemID.SkywareTable)
                     .AddIngredient(ItemID.Cloud, 8)
                     .AddIngredient(ItemID.FallenStar, 2)
-                    .AddTile(TileID.WorkBenches)
                     .Register();
 
                 recipe = Recipe.Create(ItemID.SkywareChair)
                     .AddIngredient(ItemID.Cloud, 4)
                     .AddIngredient(ItemID.FallenStar, 1)
-                    .AddTile(TileID.WorkBenches)
                     .Register();
 
                 recipe = Recipe.Create(ItemID.SkywareDoor)
                     .AddIngredient(ItemID.Cloud, 6)
                     .AddIngredient(ItemID.FallenStar, 1)
-                    .AddTile(TileID.WorkBenches)
                     .Register();
             }
 
@@ -76,10 +79,11 @@ namespace SkyblockBrutalism
                 .AddTile(TileID.Solidifier)
                 .Register();
 
+            //Avoid changing clothier voodoo doll crafting "cost" due to config
             recipe = Recipe.Create(ItemID.ClothierVoodooDoll)
-                .AddIngredient(ModContent.ItemType<LifelessVoodooDoll>())
+                .AddIngredient(ModContent.GetInstance<Config>().LifelessVoodooDoll ? ModContent.ItemType<LifelessVoodooDoll>() : ItemID.GuideVoodooDoll)
                 .AddIngredient(ItemID.RedHat)
-                .AddTile(TileID.DemonAltar)
+                .AddTile(DemonAltarOrTinkerRestricted)
                 .Register();
 
             recipe = Recipe.Create(ItemID.ClayBlock)
@@ -91,6 +95,17 @@ namespace SkyblockBrutalism
             recipe = Recipe.Create(ItemID.DirtiestBlock)
                 .AddIngredient(ItemID.DirtBlock, 350)
                 .AddTile(TileID.WorkBenches)
+                .Register();
+
+            recipe = Recipe.Create(ItemID.GlowTulip)
+                .AddIngredient(ItemID.Fertilizer, 50)
+                .AddIngredient(ItemID.SkyBlueFlower)
+                .AddTile(TileID.WorkBenches)
+                .Register();
+
+            recipe = Recipe.Create(ItemID.EncumberingStone)
+                .AddIngredient(ItemID.FossilOre, 20)
+                .AddTile(TileID.HeavyWorkBench)
                 .Register();
 
             recipe = Recipe.Create(ItemID.Granite, 5)
@@ -194,7 +209,7 @@ namespace SkyblockBrutalism
                 .Register();
 
             recipe = Recipe.Create(ItemID.LihzahrdBrick)
-                .AddRecipeGroup(nameof(ItemID.AncientBlueDungeonBrick))
+                .AddRecipeGroup(ModContent.GetInstance<Config>().RestrictedMode ? nameof(ItemID.AncientGoldBrick) : nameof(ItemID.AncientBlueDungeonBrick))
                 .AddIngredient(ItemID.TempleKey)
                 .AddIngredient(ItemID.JungleKey)
                 .AddIngredient(ItemID.CorruptionKey)
@@ -205,13 +220,18 @@ namespace SkyblockBrutalism
                 .AddConsumeItemCallback((Recipe recipe, int type, ref int amount) => {
                     if (type == ItemID.TempleKey || type == ItemID.JungleKey || type == ItemID.CorruptionKey || type == ItemID.CrimsonKey || type == ItemID.HallowedKey || type == ItemID.FrozenKey || type == ItemID.DungeonDesertKey)
                     { amount = 0; } })
-                .AddTile(TileID.DemonAltar)
+                .AddTile(DemonAltarOrTinkerRestricted)
                 .Register();
 
             recipe = Recipe.Create(ItemID.LihzahrdAltar)
                 .AddIngredient(ItemID.LihzahrdBrick, 15)
                 .AddIngredient(ItemID.LizardEgg)
                 .AddTile(TileID.SkyMill)
+                .Register();
+
+            recipe = Recipe.Create(ItemID.LihzahrdFurnace)
+                .AddIngredient(ItemID.LihzahrdBrick, 15)
+                .AddTile(TileID.HeavyWorkBench)
                 .Register();
             //Unsafe Walls-----------------------------------
             recipe = Recipe.Create(ItemID.SpiderWallUnsafe)
@@ -276,25 +296,46 @@ namespace SkyblockBrutalism
 
             recipe = Recipe.Create(ItemID.LihzahrdWallUnsafe)
                 .AddIngredient(ItemID.LihzahrdBrickWall)
-                .AddTile(TileID.DemonAltar)
+                .AddTile(DemonAltarOrTinkerRestricted)
                 .Register();
 
             //adds same recipes for same Altars as added by this mod, but for MagicStorage instead.
             if (ModLoader.TryGetMod("MagicStorage", out Mod MagicStorage) && MagicStorage.TryFind<ModItem>("DemonAltar", out ModItem DemonAltar) && MagicStorage.TryFind<ModItem>("CrimsonAltar", out ModItem CrimsonAltar))
             {
-                recipe = Recipe.Create(DemonAltar.Type)
-                    .AddIngredient(ItemID.DemonTorch, 5)
-                    .AddIngredient(ItemID.RottenChunk, 10)
-                    .AddIngredient(ItemID.Ebonwood, 20)
-                    .AddTile(TileID.WorkBenches)
-                    .Register();
+                if (ModContent.GetInstance<Config>().RestrictedMode)
+                {
+                    recipe = Recipe.Create(DemonAltar.Type)
+                        .AddIngredient(ItemID.LunarOre, 10)
+                        .AddIngredient(ItemID.DemonTorch, 5)
+                        .AddIngredient(ItemID.RottenChunk, 10)
+                        .AddIngredient(ItemID.Ebonwood, 20)
+                        .AddTile(TileID.WorkBenches)
+                        .Register();
 
-                recipe = Recipe.Create(CrimsonAltar.Type)
-                    .AddIngredient(ItemID.DemonTorch, 5)
-                    .AddIngredient(ItemID.Vertebrae, 10)
-                    .AddIngredient(ItemID.Shadewood, 20)
-                    .AddTile(TileID.WorkBenches)
-                    .Register();
+                    recipe = Recipe.Create(CrimsonAltar.Type)
+                        .AddIngredient(ItemID.LunarOre, 10)
+                        .AddIngredient(ItemID.DemonTorch, 5)
+                        .AddIngredient(ItemID.Vertebrae, 10)
+                        .AddIngredient(ItemID.Shadewood, 20)
+                        .AddTile(TileID.WorkBenches)
+                        .Register();
+                }
+                else
+                {
+                    recipe = Recipe.Create(DemonAltar.Type)
+                        .AddIngredient(ItemID.DemonTorch, 5)
+                        .AddIngredient(ItemID.RottenChunk, 10)
+                        .AddIngredient(ItemID.Ebonwood, 20)
+                        .AddTile(TileID.WorkBenches)
+                        .Register();
+
+                    recipe = Recipe.Create(CrimsonAltar.Type)
+                        .AddIngredient(ItemID.DemonTorch, 5)
+                        .AddIngredient(ItemID.Vertebrae, 10)
+                        .AddIngredient(ItemID.Shadewood, 20)
+                        .AddTile(TileID.WorkBenches)
+                        .Register();
+                }
             }
         }
         public override void PostAddRecipes()

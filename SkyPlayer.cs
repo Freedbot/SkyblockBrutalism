@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework;
 using System.Linq;
 using Terraria.Chat;
 using Terraria.Localization;
+using static Terraria.ModLoader.ModContent;
+using SkyblockBrutalism.Items;
+using SkyblockBrutalism.NPCs;
 
 namespace SkyblockBrutalism
 {
@@ -25,6 +28,104 @@ namespace SkyblockBrutalism
                 return;
             }
         }
+
+        //Mimic spawn from chest code from ExampleMod/Old/NPCs
+        public int LastChest;
+
+        // This doesn't make sense, but this is around where this check happens in Vanilla Terraria.
+        public override void PreUpdateBuffs()
+        {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                if (Player.chest == -1 && LastChest >= 0 && Main.chest[LastChest] != null)
+                {
+                    int x2 = Main.chest[LastChest].x;
+                    int y2 = Main.chest[LastChest].y;
+                    ChestItemSummonCheck(x2, y2, Player.ZoneSnow, Mod);
+                }
+                LastChest = Player.chest;
+            }
+        }
+
+        // Allows mimic spawning in single player with autopause on
+        public override void UpdateAutopause()
+        {
+            LastChest = Player.chest;
+        }
+
+        public static bool ChestItemSummonCheck(int x, int y, bool iceMimic, Mod mod)
+        {
+            if (Main.netMode == NetmodeID.MultiplayerClient)
+            {
+                return false;
+            }
+            int num = Chest.FindChest(x, y);
+            if (num < 0)
+            {
+                return false;
+            }
+            int numberKeysOfMagic = 0;
+            int numberOtherItems = 0;
+            ushort tileType = Main.tile[Main.chest[num].x, Main.chest[num].y].TileType;
+            int tileStyle = (int)(Main.tile[Main.chest[num].x, Main.chest[num].y].TileFrameX / 36);
+            if (TileID.Sets.BasicChest[tileType] && (tileStyle < 5 || tileStyle > 6))
+            {
+                for (int i = 0; i < 40; i++)
+                {
+                    if (Main.chest[num].item[i] != null && Main.chest[num].item[i].type > ItemID.None)
+                    {
+                        if (Main.chest[num].item[i].type == ItemType<KeyOfMagic>())
+                        {
+                            numberKeysOfMagic += Main.chest[num].item[i].stack;
+                        }
+                        else
+                        {
+                            numberOtherItems++;
+                        }
+                    }
+                }
+            }
+            //can be changed to any count or content of items to activate, but will kindly avoid activating and destroying extra items.
+            if (numberOtherItems == 0 && numberKeysOfMagic == 1)
+            {
+                if (TileID.Sets.BasicChest[Main.tile[x, y].TileType])
+                {
+                    if (Main.tile[x, y].TileFrameX % 36 != 0)
+                    {
+                        x--;
+                    }
+                    if (Main.tile[x, y].TileFrameY % 36 != 0)
+                    {
+                        y--;
+                    }
+                    int number = Chest.FindChest(x, y);
+                    for (int j = x; j <= x + 1; j++)
+                    {
+                        for (int k = y; k <= y + 1; k++)
+                        {
+                            if (TileID.Sets.BasicChest[Main.tile[j, k].TileType])
+                            {
+                                Main.tile[j, k].ClearTile();
+                            }
+                        }
+                    }
+                    for (int l = 0; l < 40; l++)
+                    {
+                        Main.chest[num].item[l] = new Item();
+                    }
+                    Chest.DestroyChest(x, y);
+                    NetMessage.SendData(MessageID.ChestUpdates, -1, -1, null, 1, (float)x, (float)y, 0f, number);
+                    NetMessage.SendTileSquare(-1, x, y, 3);
+                }
+                int npcToSpawn = NPCType<MimicClone>();
+                int npcIndex = NPC.NewNPC(NPC.GetSource_None(), x * 16 + 8, y * 16 + 32, npcToSpawn);
+                Main.npc[npcIndex].whoAmI = npcIndex;
+                NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, npcIndex);
+                Main.npc[npcIndex].BigMimicSpawnSmoke();
+            }
+            return false;
+        }
+
 
         //The following stores player first boss kill data and applies health when valid.  Mod packets are sent here.  Data is saved to player file.  Player health cannot be changed outside of here it seems.
 

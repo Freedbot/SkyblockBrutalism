@@ -19,17 +19,28 @@ namespace SkyblockBrutalism.Items
 
         public override void AddRecipes()
         {
-            Recipe.Create(ItemID.GuideVoodooDoll)
-                .AddIngredient(this)
-                .AddIngredient(ItemID.DD2EnergyCrystal, 40)
-                .AddTile(TileID.DemonAltar)
-                .Register();
+            if (ModContent.GetInstance<Config>().RestrictedMode)
+            {
+                Recipe.Create(ItemID.GuideVoodooDoll)
+                    .AddIngredient(this)
+                    .AddIngredient(ItemID.PartyHat)
+                    .AddTile(TileID.Loom)
+                    .Register();
+            }
+            else
+            {
+                Recipe.Create(ItemID.GuideVoodooDoll)
+                    .AddIngredient(this)
+                    .AddIngredient(ItemID.DD2EnergyCrystal, 40)
+                    .AddTile(TileID.DemonAltar)
+                    .Register();
 
-            Recipe.Create(ItemID.GuideVoodooDoll)
-                .AddIngredient(this)
-                .AddIngredient(ItemID.Book)
-                .AddTile(TileID.DemonAltar)
-                .Register();
+                Recipe.Create(ItemID.GuideVoodooDoll)
+                    .AddIngredient(this)
+                    .AddIngredient(ItemID.Book)
+                    .AddTile(TileID.DemonAltar)
+                    .Register();
+            }
         }
     }
 }

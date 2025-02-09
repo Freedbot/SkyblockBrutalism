@@ -13,10 +13,22 @@ namespace SkyblockBrutalism.Items
         }
         public override void AddRecipes()
         {
-            CreateRecipe()
-                .AddIngredient(ItemID.Dirt3Echo)
-                .AddTile(TileID.DemonAltar)
-                .Register();
+            if (ModContent.GetInstance<Config>().RestrictedMode)
+            {
+                CreateRecipe(30)
+                    .AddIngredient(ItemID.Dirt3Echo, 15)
+                    .AddIngredient(ItemID.AshBlock, 15)
+                    .AddTile(TileID.WorkBenches)
+                    .AddCondition(Condition.DownedSkeletron)
+                    .Register();
+            }
+            else
+            {
+                CreateRecipe()
+                    .AddIngredient(ItemID.Dirt3Echo)
+                    .AddTile(TileID.DemonAltar)
+                    .Register();
+            }
         }
     }
 }

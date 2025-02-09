@@ -35,8 +35,10 @@ namespace SkyblockBrutalism.Items
         {
             if (player.HeldItem.type == ModContent.ItemType<FireResistantBugNet>() && (target.type == NPCID.HellButterfly || target.type == NPCID.Lavafly || target.type == NPCID.MagmaSnail) && Main.rand.NextBool(7))
             {
-                WorldGen.PlaceLiquid(player.position.ToTileCoordinates().X, player.position.ToTileCoordinates().Y, (byte)LiquidID.Lava, 255);
-                player.HeldItem.type = ItemID.BugNet;
+                WorldGen.PlaceLiquid(target.position.ToTileCoordinates().X, target.position.ToTileCoordinates().Y, (byte)LiquidID.Lava, 255);
+                //simply changing the item type seems to just corrupt it, so now we're deleting it first.
+                player.HeldItem.TurnToAir();
+                player.HeldItem.SetDefaults(ItemID.BugNet);
             }
             return null;
         }

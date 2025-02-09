@@ -17,6 +17,7 @@
     <None Remove="Items\Gelatin.png" />
     <None Remove="Items\Honey.png" />
     <None Remove="Items\icon.png" />
+    <None Remove="Items\KeyOfMagic.png" />
     <None Remove="Items\Lava.png" />
     <None Remove="Items\LeakyBarrel.png" />
     <None Remove="Items\LifelessVoodooDoll.png" />

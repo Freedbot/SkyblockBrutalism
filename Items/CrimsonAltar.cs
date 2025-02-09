@@ -10,7 +10,7 @@ namespace SkyblockBrutalism.Items
     {
         public override bool IsLoadingEnabled(Mod mod)
         {
-            return !ModLoader.TryGetMod("MagicStorage", out var MagicStorage);
+            return (!ModLoader.TryGetMod("MagicStorage", out var MagicStorage));
         }
         public override void SetStaticDefaults()
         {
@@ -35,12 +35,25 @@ namespace SkyblockBrutalism.Items
 
         public override void AddRecipes()
         {
-            CreateRecipe()
-                .AddIngredient(ItemID.DemonTorch, 5)
-                .AddIngredient(ItemID.Vertebrae, 10)
-                .AddIngredient(ItemID.Shadewood, 20)
-                .AddTile(TileID.WorkBenches)
-                .Register();
+            if (ModContent.GetInstance<Config>().RestrictedMode)
+            {
+                CreateRecipe()
+                    .AddIngredient(ItemID.LunarOre, 10)
+                    .AddIngredient(ItemID.DemonTorch, 5)
+                    .AddIngredient(ItemID.Vertebrae, 10)
+                    .AddIngredient(ItemID.Shadewood, 20)
+                    .AddTile(TileID.WorkBenches)
+                    .Register();
+            }
+            else
+            {
+                CreateRecipe()
+                    .AddIngredient(ItemID.DemonTorch, 5)
+                    .AddIngredient(ItemID.Vertebrae, 10)
+                    .AddIngredient(ItemID.Shadewood, 20)
+                    .AddTile(TileID.WorkBenches)
+                    .Register();
+            }
         }
     }
 }

@@ -48,6 +48,11 @@ Mods: {
 				[i:PurificationPowder]& [i:Clentaminator] are available in Remix worlds.
 				[i:Tombstone]+[i:SolarTablet]/[i:BloodMoonStarter]= alternate[i:PurpleSolution]/[i:RedSolution]     [i:MartianUniformHelmet]=[i:SandSolution][i:SnowSolution][i:DirtSolution]
 				'''
+			RestrictedTips:
+				'''
+
+				[c/800000:Restricted Mode!:] [i:BossMaskMoonlord]=[i:{0}/DemonAltar][i:BlueBrickWallUnsafe][i:Hellforge]   [i:SkeletronMask]=[i:SkyblockBrutalism/NaturalDirtWall]   [i:TinkerersWorkshop]=[i:LihzahrdBrick][i:LihzahrdWallUnsafe]
+				'''
 		}
 
 		Items: {
@@ -69,10 +74,12 @@ Mods: {
 				Tooltip:
 					'''
 					Your desperation for stone has lead you to massacre
-					a poor garden gnome with an evil hammer. [i:TheBreaker]/[i:FleshGrinder]
+					a poor garden gnome with {0}
 					'After all, a gnome that's turned to stone should
 					be usable as such... right?'
 					'''
+				SpecificHammer: an evil hammer. [i:TheBreaker]/[i:FleshGrinder]
+				AnyHammerRestrictedMode: any hammer. [i:WoodenHammer]
 			}
 
 			SkyGuide: {
@@ -123,6 +130,8 @@ Mods: {
 				DisplayName: Storm Cloud
 				Tooltip:
 					'''
+					Attempts to start a thunder storm if it is not
+					currently stormy.
 					'You called the Thunder?
 					Now reap the whirlwind.'
 					'''
@@ -181,12 +190,35 @@ Mods: {
 					'There's always room for Jell-O!'
 					'''
 			}
+
+			KeyOfMagic: {
+				DisplayName: Key Of Magic
+				Tooltip:
+					'''
+					Summons a Pre-Hardmode mimic when left in an
+					otherwise empty chest.  The mimic contains a
+					treasure typically found in gold chests, but
+					no other supplies or wealth.
+					'''
+			}
 		}
 
 		Tiles: {
 			Skyblock.MapEntry: Skyblock
 			EvilAltarTile.MapEntry: Evil Altar Tile
 			LeakyBarrel.MapEntry: Leaky Barrel
+		}
+
+		NPCs: {
+			MimicClone: {
+				DisplayName: Mimic
+				BestiaryInfo:
+					'''
+					An artificial mimic summoned with a Key of Magic.
+					The mimic contains a treasure typically found in
+					gold chests, but no other supplies or wealth.
+					'''
+			}
 		}
 
 		Configs: {
@@ -201,6 +233,17 @@ Mods: {
 						craft at a workbench or make NPC housing.
 						'''
 					Label: Early Furniture
+				}
+
+				RestrictedMode: {
+					Tooltip:
+						'''
+						For "Purist" Skyblock players.  This mode disables certain mod features
+						Skyblock Brutalism adds to allow access to Terraria content not strictly
+						"required" to beat the game.  This means no Demon/Crimson Altar, no
+						Corrupt/Crimson bosses, and no Dungeon access.
+						'''
+					Label: Restricted Mode
 				}
 
 				LifelessVoodooDoll: {

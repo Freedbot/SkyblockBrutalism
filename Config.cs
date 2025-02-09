@@ -25,6 +25,9 @@ namespace SkyblockBrutalism
         public bool EarlyFurniture;
 
         [ReloadRequired]
+        public bool RestrictedMode;
+
+        [ReloadRequired]
         [DefaultValue(true)]
         public bool LifelessVoodooDoll;
 

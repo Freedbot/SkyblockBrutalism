@@ -16,11 +16,29 @@ using Terraria.Chat;
 using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using SkyblockBrutalism.Items;
+using Terraria.ModLoader.Utilities;
 
 namespace SkyblockBrutalism.NPCs
 {
     public class NPCEdits : GlobalNPC
     {
+        public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
+        {
+            //Adds pinky to the general mob spawn pools in 3 layers at roughly the same rate as vanilla, effectively doubling the rate, theoretically more in cavern.
+            //This shouldn't affect slime rain or windy day spawns.
+            if (spawnInfo.Player.InZonePurity())
+            {
+                if ((spawnInfo.Player.ZoneDirtLayerHeight && !Main.remixWorld) || (spawnInfo.Player.ZoneRockLayerHeight && Main.remixWorld))
+                {
+                    pool[NPCID.Pinky] = SpawnCondition.Underground.Chance * .005f;
+                }
+                else if ((spawnInfo.Player.ZoneRockLayerHeight && !Main.remixWorld) || (spawnInfo.Player.ZoneDirtLayerHeight && Main.remixWorld))
+                {
+                    pool[NPCID.Pinky] = SpawnCondition.Cavern.Chance * .0025f;
+                }
+                else pool[NPCID.Pinky] = SpawnCondition.OverworldDaySlime.Chance * .005f;
+            }
+        }
         public override void ModifyShop(NPCShop shop)
         {
             if (shop.NpcType == NPCID.Dryad)
@@ -45,10 +63,20 @@ namespace SkyblockBrutalism.NPCs
                 shop.Add(ItemID.SnowSolution, Condition.NotDownedMoonLord, Condition.DownedMartians);
                 shop.Add(ItemID.DirtSolution, Condition.NotDownedMoonLord, Condition.DownedMartians);
             }
-            //if (shop.NpcType == NPCID.Truffle)
-            //{
-            //    shop.Add(ItemID.BlueSolution, Condition.RemixWorld);
-            //}
+            if (shop.NpcType == NPCID.Truffle)
+            {
+                shop.Add(ItemID.DarkBlueSolution, Condition.RemixWorld);
+            }
+            if (shop.NpcType == NPCID.SkeletonMerchant)
+            {
+                shop.Add(new Item(ItemID.GoldChest) { shopCustomPrice = Item.buyPrice(gold: 1) });
+                shop.Add(ItemID.Spear, Condition.MoonPhaseWaningCrescent);
+                shop.Add(ItemID.Blowpipe, Condition.MoonPhaseFirstQuarter);
+            }
+            if (shop.NpcType == NPCID.Merchant)
+            {
+                shop.Add(ItemID.FlareGun, Condition.NpcIsPresent(NPCID.ArmsDealer));
+            }
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
@@ -69,6 +97,10 @@ namespace SkyblockBrutalism.NPCs
                     rule => rule is CommonDrop drop
                     && drop.itemId == ItemID.GuideVoodooDoll);
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifelessVoodooDoll>()));
+            }
+            if (npc.type is NPCID.WallCreeper or NPCID.BlackRecluse)
+            {
+                npcLoot.Add(ItemDropRule.Common(ItemID.WebSlinger, 200));
             }
         }
         public override void OnKill(NPC npc)
@@ -121,6 +153,11 @@ namespace SkyblockBrutalism.NPCs
                         entity.defense = 0;
                     }
                 }
+            }
+            //Crude prevention of direct WoF summoning without voodoo doll
+            if (entity.type == NPCID.Guide && ModContent.GetInstance<Config>().LifelessVoodooDoll)
+            {
+                entity.lavaImmune = true;
             }
             //Bees are critters. I changed progression so I don't need this...
             //but the memes...  See Items/Bee.cs

@@ -18,6 +18,7 @@ using Terraria.DataStructures;
 using SkyblockBrutalism.Items;
 using Terraria.ModLoader.IO;
 using rail;
+using Humanizer;
 
 namespace SkyblockBrutalism.UI
 {
@@ -42,6 +43,7 @@ namespace SkyblockBrutalism.UI
             string title = Language.GetTextValue("Mods.SkyblockBrutalism.UI.Title");
             string introText = Language.GetTextValue("Mods.SkyblockBrutalism.UI.Intro");
             string tipsText = Language.GetTextValue("Mods.SkyblockBrutalism.UI.Tips");
+            string restrictedTipsText = Language.GetTextValue("Mods.SkyblockBrutalism.UI.RestrictedTips").FormatWith(ModLoader.HasMod("MagicStorage") ? "MagicStorage" : "SkyblockBrutalism");
             string easyButtonText = Language.GetTextValue("Mods.SkyblockBrutalism.UI.EasyButton");
             string hardButtonText = Language.GetTextValue("Mods.SkyblockBrutalism.UI.HardButton");
             string brutalButtonText = Language.GetTextValue("Mods.SkyblockBrutalism.UI.BrutalButton");
@@ -88,7 +90,7 @@ namespace SkyblockBrutalism.UI
             Intro.MarginTop = 50;
 
             //SkyGuide Tips
-            Tips = new UIText(tipsText, 1f);
+            Tips = ModContent.GetInstance<Config>().RestrictedMode ? new UIText(tipsText + restrictedTipsText, 1f) : new UIText(tipsText, 1f);
             Tips.MarginLeft = 15;
             Tips.MarginTop = 50;
 

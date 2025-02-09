@@ -5,6 +5,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using SkyblockBrutalism;
 using System.IO;
@@ -13,6 +14,10 @@ namespace SkyblockBrutalism.Items
 {
 	public class RuinedGnome : ModItem
 	{
+        public static string specificHammer = Language.GetTextValue("Mods.SkyblockBrutalism.Items.RuinedGnome.SpecificHammer");
+        public static string anyHammerRestrictedMode = Language.GetTextValue("Mods.SkyblockBrutalism.Items.RuinedGnome.AnyHammerRestrictedMode");
+        
+        public override LocalizedText Tooltip => base.Tooltip.WithFormatArgs(ModContent.GetInstance<Config>().RestrictedMode ? anyHammerRestrictedMode : specificHammer);
         public override void SetStaticDefaults()
         {
             ItemID.Sets.SortingPriorityBossSpawns[Item.type] = 12; // This helps sort inventory know this is a boss summoning item.
@@ -61,7 +66,11 @@ namespace SkyblockBrutalism.Items
         {
             if (Main.netMode is not NetmodeID.Server)
             {
-                Main.tileHammer[TileID.GardenGnome] = item.type is ItemID.TheBreaker or ItemID.FleshGrinder;
+                if (ModContent.GetInstance<Config>().RestrictedMode)
+                {
+                    Main.tileHammer[TileID.GardenGnome] = item.hammer > 0;
+                }
+                else Main.tileHammer[TileID.GardenGnome] = item.type is ItemID.TheBreaker or ItemID.FleshGrinder;
             }
         }
     }

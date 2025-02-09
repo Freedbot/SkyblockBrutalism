@@ -60,6 +60,14 @@ namespace SkyblockBrutalism.Items
             {
                 itemLoot.Add(ItemDropRule.Common(ItemID.Hellforge, 5));
             }
+            if (item.type == ItemID.OasisCrate || item.type == ItemID.OasisCrateHard)
+            {
+                itemLoot.Add(ItemDropRule.Common(ItemID.FlyingCarpet, 35));
+            }
+            if (item.type == ItemID.LockBox)
+            {
+                itemLoot.Add(ItemDropRule.Common(ItemID.WaterBolt, 10));
+            }
             if (item.type == ItemID.DungeonFishingCrateHard)
             {
                 itemLoot.Add(ItemDropRule.OneFromOptions(3,
