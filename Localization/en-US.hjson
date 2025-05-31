@@ -13,7 +13,12 @@ ItemTooltip: {
 Mods: {
 	SkyblockBrutalism: {
 		BlankWorldGen.MakeSkyblock: Generating Skyblock World
-		DropConditions.Dirt: killed with [i:GravediggerShovel]
+
+		DropConditions: {
+			Dirt: killed with [i:GravediggerShovel]
+			MechSkull: Between killing Skeletron Prime and Mechdusa in Restricted Mode.
+		}
+
 		ItemEdits.GraveDigDirt: Intered Zombies become [i:DirtBlock]
 
 		UI: {

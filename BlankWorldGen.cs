@@ -24,7 +24,9 @@ namespace SkyblockBrutalism
         {
             if (ModContent.GetInstance<Config>().SkyblockWorldGen)
             {
+                GenPass resetTask = tasks.Find((GenPass genpass) => genpass.Name.Equals("Reset"));
                 tasks.Clear();
+                tasks.Add(resetTask);
                 int resetIndex = tasks.FindIndex((GenPass genpass) => genpass.Name.Equals("Reset"));
                 tasks.Insert(resetIndex + 1, new PassLegacy("Adding Skyblocks", new WorldGenLegacyMethod(this.AddSkyblocksPass), 1.0));
             }
@@ -40,6 +42,7 @@ namespace SkyblockBrutalism
             Main.dungeonX = Main.maxTilesX / 2;
             Main.dungeonY = Main.maxTilesY / 4 - 80;
             Main.worldSurface = Main.maxTilesY / 4;
+
             if (Main.remixWorld)
             {
                 Main.rockLayer = Main.maxTilesY * 0.6;
@@ -48,7 +51,7 @@ namespace SkyblockBrutalism
             {
                 Main.rockLayer = Main.maxTilesY / 2.5;
             }
-            
+
             int isleSpread = Main.maxTilesX / 6;
             for (int i = Main.spawnTileX; i < Main.maxTilesX-10; i += isleSpread)
             {
@@ -62,8 +65,16 @@ namespace SkyblockBrutalism
 
             WorldGen.PlaceTile(Main.dungeonX, Main.dungeonY, TileID.CrackedBlueDungeonBrick);
             WorldGen.PlaceWall(Main.dungeonX, Main.dungeonY, WallID.BlueDungeonUnsafe);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
+            //Below actions finish off the world file and are taken from WorldGen.Final Cleanup.  I'm not certain which steps are vital, or what they do, however...
+            //I can confirm that without "WorldGen.gen = false", loading the world in multiplayer will delete all items dropped by the player until a file is loaded in singleplayer.
+            WorldGen.gen = false;
+            WorldGen.noTileActions = false;
+            Main.WorldFileMetadata = FileMetadata.FromCurrentSettings(FileType.World);
+            Main.NotifyOfEvent(GameNotificationType.WorldGen);
+
             progress.Set(1.0);
+            Thread.Sleep(500);
         }
     }
 }

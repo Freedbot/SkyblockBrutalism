@@ -17,6 +17,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent.ItemDropRules;
 using SkyblockBrutalism.Items;
 using Terraria.ModLoader.Utilities;
+using Conditions = Terraria.GameContent.ItemDropRules.Conditions;
 
 namespace SkyblockBrutalism.NPCs
 {
@@ -121,6 +122,11 @@ namespace SkyblockBrutalism.NPCs
                     player.GetModPlayer<SkyPlayer>().HandleBossDefeated(npc.type);
                 }
             }
+        }
+        //Restricted Mode specific softlock prevention so mechdusa is always available when bones aren't.  See NPCs/MechSkullCondition.cs
+        public override void ModifyGlobalLoot(GlobalLoot globalLoot)
+        {
+            globalLoot.Add(ItemDropRule.ByCondition(new MechSkullCondition(), ItemID.MechanicalSkull, 2500));
         }
         //Finally, a fix for the void bug that leaves town NPC's trapped in the void without dying or respawning.  Turns out there's a not Christmas check for no reason in the kill code.
         public override void PostAI(NPC npc)

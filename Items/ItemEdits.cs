@@ -11,6 +11,7 @@ using Terraria.GameContent.ItemDropRules;
 using static Terraria.ModLoader.PlayerDrawLayer;
 using Terraria.Localization;
 using System.Linq;
+using Terraria.Chat;
 
 namespace SkyblockBrutalism.Items
 {
@@ -118,32 +119,39 @@ namespace SkyblockBrutalism.Items
         public override bool? UseItem(Item item, Player player)
         {
             //remove 200 health check from Snow Globe for Frost Legion.  See NPCs.NPCEdits.cs
-            if (item.type == ItemID.SnowGlobe && player.ConsumedLifeCrystals < 5 && Main.invasionType == 0)
+            //I check for invasion size rather than the presence of an invasion because the server doesn't inform the client about invasion type very often, which caused multiplayer clients to not consume snowglobes, but the invasion still starts on the server.
+            if (item.type == ItemID.SnowGlobe && player.ConsumedLifeCrystals < 5 && Main.invasionSize <= 0)
             {
+                //The Frost Legion has arrived!
                 SoundEngine.PlaySound(SoundID.Roar, player.position);
+                if (Main.netMode == NetmodeID.SinglePlayer)
+                {
+                    Main.NewText(Lang.misc[7].ToString(), 175, 75);
+                }
+                else if (Main.netMode == NetmodeID.Server)
+                {
+                    ChatHelper.BroadcastChatMessage(NetworkText.FromKey(Lang.misc[7].Key), new Color(175, 75, 255));
+                }
+                //Remade/butchered the StartInvasion code from Main.cs here to start manually because the health check is everywhere.
+                //Main.StartInvasion(InvasionID.SnowLegion);
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
-                    //Remade/butchered the StartInvasion code from Main.cs here to start manually because the health check is everywhere.
-                    //Main.StartInvasion(InvasionID.SnowLegion);
                     int playerCount = 0;
                     for (int index = 0; index < (int)byte.MaxValue; ++index)
                     {
                         if (Main.player[index].active)
                             ++playerCount;
                     }
-                    if (playerCount <= 0)
-                        Main.invasionType = 0;
                     Main.invasionType = InvasionID.SnowLegion;
+                    Main.invasionDelay = 0;
                     Main.invasionSize = 80 + 40 * playerCount;
                     Main.invasionSizeStart = Main.invasionSize;
                     Main.invasionProgress = 0;
                     Main.invasionProgressWave = 0;
                     Main.invasionProgressMax = Main.invasionSizeStart;
+                    Main.invasionProgressIcon = InvasionID.SnowLegion + 3;
                     Main.invasionWarn = 0;
-                    if (Main.rand.NextBool(2))
-                        Main.invasionX = 0.0;
-                    else
-                        Main.invasionX = (double)Main.maxTilesX;
+                    Main.invasionX = Main.spawnTileX - 1;
                 }
                 return true;
             }
