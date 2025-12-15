@@ -49,7 +49,7 @@ Mods: {
 				[i:SuspiciousLookingEye]=[i:JungleGrassSeeds]=[i:Furnace]    [i/s106:Torch]=[i:SpiderWallUnsafe][i:HardenedSandWallUnsafe][i:BlueBrickWallUnsafe][i:LihzahrdWallUnsafe]     [i:SkyblockBrutalism/NaturalDirtWall]=[i:StoneBlock]    [i:SkyblockBrutalism/Lava]=[i:SkyblockBrutalism/Water]
 				[i:StoneBlock]+[i:Extractinator]=[i:SandBlock]     [i:BeeHive]->[i:SkyblockBrutalism/Water]or[i:WoodFishingPole]->[i:SkyblockBrutalism/Honey]=[i:Hive]     [i:DeerThing]=[i:IceBlock]
 				[i:LavaCrate]=[i:Hellstone]     [i:ObsidianLockbox]=[i:Hellforge]     [i:Gel]=[i:DartTrap]=[i:GeyserTrap][i:SuperDartTrap][i:FlameTrap][i:SpikyBallTrap][i:SpearTrap]
-				No [i:TempleKey]'s are consumed for[i:LihzahrdBrick].     [i:DungeonFishingCrateHard]=[i:HeartStatue]
+				No keys are consumed for[i:LihzahrdBrick].     [i:DungeonFishingCrateHard]=[i:HeartStatue]
 				[i:PurificationPowder]& [i:Clentaminator] are available in Remix worlds.
 				[i:Tombstone]+[i:SolarTablet]/[i:BloodMoonStarter]= alternate[i:PurpleSolution]/[i:RedSolution]     [i:MartianUniformHelmet]=[i:SandSolution][i:SnowSolution][i:DirtSolution]
 				'''
