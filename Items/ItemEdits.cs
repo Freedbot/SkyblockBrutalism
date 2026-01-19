@@ -119,8 +119,8 @@ namespace SkyblockBrutalism.Items
         public override bool? UseItem(Item item, Player player)
         {
             //remove 200 health check from Snow Globe for Frost Legion.  See NPCs.NPCEdits.cs
-            //I check for invasion size rather than the presence of an invasion because the server doesn't inform the client about invasion type very often, which caused multiplayer clients to not consume snowglobes, but the invasion still starts on the server.
-            if (item.type == ItemID.SnowGlobe && player.ConsumedLifeCrystals < 5 && Main.invasionSize <= 0)
+            //The server is lazy about informing the client about invasions, which can mess with client snowglobe consumption.  A client that has yet to see invasion in that session has type 0.  After invasion, the type remains, but progress will be 100%.  InvasionSize seems to always be 0 on the client, but I left it in out of paranoia and because it's accurate on server.
+            if (item.type == ItemID.SnowGlobe && player.ConsumedLifeCrystals < 5 && Main.invasionSize <= 0 && (Main.invasionProgress >= Main.invasionProgressMax || Main.invasionType == 0))
             {
                 //The Frost Legion has arrived!
                 SoundEngine.PlaySound(SoundID.Roar, player.position);
